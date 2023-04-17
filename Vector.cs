@@ -76,7 +76,6 @@ namespace DSA
                         Swap(j-1,j);
                     }
                 }
-                hi--;
             }
         }
 
