@@ -12,9 +12,12 @@ namespace DSA
         private int capacity;
         private int size;
         #region 构造函数
-        public Vector(int cap = 0,int size = 0)
+        public Vector(int cap = 0)
         {
+            capacity = cap;
+            size = 0;
             mArray = new T[cap];
+
             //for(int i = 0; i < size;i++)
             //{
             //    mArray[i] = value;
@@ -39,26 +42,47 @@ namespace DSA
         #endregion
 
         #region 排序接口
-        public void SelectionSort(int lo,int hi)
+        
+        public void SelectionSort(int lo, int hi)
         {
-            for(int i = lo;i<hi;i++) 
+            //未排序部分找到最小值，然后和未排序部分的开头交换，每次遍历确定一个已排序部分元素
+            for (int i = lo; i < hi; i++)
             {
                 int minIndex = i;
-                for(int j = i+1;j < hi;j++)
+                for (int j = i + 1; j < hi; j++)
                 {
-                    //if (mArray[minIndex].CompareTo(mArray[j]) > 0 )
-                    if (mArray[j].CompareTo(mArray[minIndex]) < 0)
+                    if (mArray[minIndex].CompareTo(mArray[j]) > 0)
                     {
                         minIndex = j;
                     }
-                    
                 }
                 Swap(i, minIndex);
             }
         }
+
         public void SelectionSort()
         {
             SelectionSort(0,size);
+        }
+
+        public void BubbleSort(int lo,int hi)
+        {
+            for(int i = lo; i < hi;i++)
+            {
+                for(int j = 1; j < hi;j++)
+                {
+                    if (mArray[j - 1].CompareTo(mArray[j]) >0)
+                    {
+                        Swap(j-1,j);
+                    }
+                }
+                hi--;
+            }
+        }
+
+        public void BubbleSort()
+        {
+            BubbleSort(0,size);
         }
         
         #endregion

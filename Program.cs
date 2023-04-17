@@ -8,7 +8,8 @@ internal class Program
         //Vector<int> v = new Vector<int>();
         int[] array = { 3, 1, 4, 5, 2 };
         Vector<int> v = new Vector<int>(array);
-        v.SelectionSort();
+        //v.SelectionSort();
+        v.BubbleSort();
         Console.WriteLine("hello");
         #endregion
 
