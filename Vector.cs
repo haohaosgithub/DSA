@@ -142,6 +142,31 @@ namespace DSA
         {
             return BinarySearch(value,0,size);
         }
+        
+        public int BinarySearchLargeEq(T value,int lo,int hi)
+        {
+            int L = lo;
+            int R = hi;
+            int mid = L + (R - L) / 2;
+            while (L < R)
+            {
+                if (mArray[mid].CompareTo(value) < 0) //如果mid处的值比value小,则value只可能在mid的右边
+                {
+                    L = mid + 1;
+                    mid = L + (R - L) / 2;
+                }
+                else if (value.CompareTo(mArray[mid]) <= 0) //如果value比mid处的值小或相等，则value只可能在mid的左边，继续向左寻找
+                {
+                    R = mid;
+                    mid = L + (R - L) / 2;
+                }
+            }
+            return mid;
+        }
+        public int BinarySearchLargeEq(T value)
+        {
+            return BinarySearchLargeEq(value,0, size);
+        }
         #endregion
         #region 内部工具函数
         //从数组的[lo,hi)区间 copy 到Vector
