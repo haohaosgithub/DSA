@@ -67,15 +67,19 @@ namespace DSA
 
         public void BubbleSort(int lo,int hi)
         {
-            for(int i = lo; i < hi;i++)
+            bool isSorted = false;
+            while(!isSorted)
             {
+                isSorted = true;
                 for(int j = 1; j < hi;j++)
                 {
                     if (mArray[j - 1].CompareTo(mArray[j]) >0)
                     {
                         Swap(j-1,j);
+                        isSorted = false; //如果内循环从没进此判断，则一定是已经全部有序了
                     }
                 }
+                hi--;  //减小未排序规模
             }
         }
 
