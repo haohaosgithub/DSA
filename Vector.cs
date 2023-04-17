@@ -108,6 +108,41 @@ namespace DSA
             InsertionSort(0,size);
         }
         #endregion
+        #region 查找接口
+        /// <summary>
+        /// 二分查找：前提是有序
+        /// </summary>
+        /// <param name="value"></param>
+        /// <param name="lo"></param>
+        /// <param name="hi"></param>
+        /// <returns></returns>
+        public int BinarySearch(T value,int lo,int hi)
+        {
+            int L = lo;
+            int R = hi;
+            int mid = L + (R - L) / 2;
+            while(L< R)
+            {
+                if (value.CompareTo(mArray[mid]) == 0)
+                { return mid; }
+                else if (mArray[mid].CompareTo(value) < 0 ) //如果mid处的值比value小,则value只可能在mid的右边
+                {
+                    L = mid + 1;
+                    mid = L + (R - L) / 2;
+                }
+                else if (value.CompareTo(mArray[mid]) < 0) //如果value比mid处的值小，则value只可能在mid的左边
+                {
+                    R = mid;
+                    mid = L + (R - L) / 2;
+                }
+            }
+            return -1;
+        }
+        public int BinarySearch(T value)
+        {
+            return BinarySearch(value,0,size);
+        }
+        #endregion
         #region 内部工具函数
         //从数组的[lo,hi)区间 copy 到Vector
         void CopyFrom(T[] arr,int lo,int hi)

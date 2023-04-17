@@ -11,7 +11,8 @@ internal class Program
         //v.SelectionSort();
         //v.BubbleSort();
         v.InsertionSort();
-        Console.WriteLine("hello");
+        
+        Console.WriteLine(v.BinarySearch(8));
         #endregion
 
     }
