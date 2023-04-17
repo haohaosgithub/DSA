@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -88,6 +89,24 @@ namespace DSA
             BubbleSort(0,size);
         }
         
+        public void InsertionSort(int lo,int hi) 
+        {
+            for(int i = lo + 1; i < hi  ;i++)
+            {
+                for(int j = i;j > 0 ;j--)
+                {
+                    if (mArray[j].CompareTo(mArray[j-1]) <0)
+                    {
+                        Swap(j,j-1);
+                    }
+                }
+            }
+        }
+
+        public void InsertionSort()
+        {
+            InsertionSort(0,size);
+        }
         #endregion
         #region 内部工具函数
         //从数组的[lo,hi)区间 copy 到Vector
