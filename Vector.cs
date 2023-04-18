@@ -141,30 +141,58 @@ namespace DSA
             return BinarySearch(value, 0, size);
         }
 
-        //找到大于等于value的最小值索引
-        public int BinarySearchLargeEq(T value, int lo, int hi)
+        //找到大于等于value的最小值索引(多个命中元素时，返回秩最小者，未命中时，返回最小的大于value的值)
+        public int BinarySearchMinRank(T value, int lo, int hi)
         {
             if (mArray == null || size == 0 || hi - lo == 0) return -1;
             int L = lo;
             int R = hi;
             int mid = 0;
-            while (L < R) //按照二分查找，在[L,R)范围找大于等于value的值的最左边，最终规模缩减为 0 L==R
+            while (L < R) //目标是 [lo,L)为小于value的数，[R,hi)为大于等于value的数，最终迭代为L == R为大于等于value的最前面位置的数
             {
                 mid = L + (R - L) / 2;
-                if (mArray[mid].CompareTo(value) < 0) //如果mid处的值比value小,则value只可能在mid的右边 
+                if (mArray[mid].CompareTo(value) < 0) //如果mid处的值比value小,则value只可能在mid的右边 ；实际扩大了小于value的数的范围 
                 {
                     L = mid + 1;
                 }
-                else if (value.CompareTo(mArray[mid]) <= 0) //如果value比mid处的值小或相等，则value只可能在mid的左边，继续向左寻找
+                else
                 {
                     R = mid;
                 }
             }
             return L; //L == R
         }
-        public int BinarySearchLargeEq(T value)
+        public int BinarySearchMinRank(T value)
         {
-            return BinarySearchLargeEq(value, 0, size);
+            return BinarySearchMinRank(value, 0, size);
+        }
+
+        //返回符合条件的秩最大者（一般有序插入位置（稳定性））
+        public int BinarySearchMaxRank(T value, int lo, int hi)
+        {
+            if (mArray == null || size == 0 || hi - lo == 0) return -1;
+            int L = lo;
+            int R = hi;
+            int mid = 0;
+            while(L < R)  //目标是 [lo,L) 范围为小于等于value的数   [hi,R）范围为 大于value的数 最终L==R为大于value的第一个数索引
+            {
+                mid = L + (R - L) / 2;
+                //value小于mArray[mid]，所以（e<）范围扩大为[mid,hi) 
+                if (value.CompareTo(mArray[mid]) < 0) 
+                {
+                    R = mid;
+                }
+                //value在右边，所以（<=e）范围扩大为[lo,mid+1)
+                else
+                {
+                    L = mid + 1;
+                }
+            }
+            return L -1; 
+        }
+        public int BinarySearchMaxRank(T value)
+        {
+            return BinarySearchMaxRank(value,0,size);
         }
         #endregion
         #region 局部最小值
