@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Globalization;
 using System.Linq;
 using System.Text;
@@ -141,7 +142,7 @@ namespace DSA
             int tempIndex = 0;
             while(p1<mid && p2< hi)
             {
-                if (mArray[p1].CompareTo(mArray[p2]) <= 0)
+                if (mArray[p1].CompareTo(mArray[p2]) <= 0)//这里小于等于，相等时先将左侧的数加入tempArr
                 {
                     temp[tempIndex++] = mArray[p1++];
                 }
@@ -238,6 +239,129 @@ namespace DSA
             }
             l = p0;
             r = p1; 
+        }
+        #endregion
+        #region 逆序对个数
+        public int ReverseOrderPairNum()
+        {
+            T[] temp = mArray;
+            int sum =  ReverseOrderPairNum(0,size);
+            mArray = temp;
+            return sum;
+        }
+        public int ReverseOrderPairNum(int lo,int hi)
+        {
+            if (hi - lo <= 1) return 0;
+            int mid = lo + ((hi - lo) >> 1);
+            int lNum = ReverseOrderPairNum(lo, mid);
+            int rNum = ReverseOrderPairNum(mid,hi);
+            int mergeNum = MergeReverseOrderPairNum(lo,hi);
+            
+            return lNum + rNum + mergeNum;
+        }
+
+        public int MergeReverseOrderPairNum(int lo,int hi)
+        {
+            T[] tempArr = new T[hi - lo];
+            int mid = lo + ((hi - lo) >> 1);
+            int i = 0;
+            int p0 = lo; 
+            int p1 = mid;
+            int sum = 0;
+            
+            int j = 0;
+            while (p0 < mid && p1 < hi)
+            {
+                if (mArray[p0].CompareTo(mArray[p1]) < 0) //这里严格小于，相等时先将右侧的数加入tempArr
+                {
+                    sum = sum + (hi - p1);
+                    tempArr[i++] = mArray[p0++];
+                }
+                else
+                {
+                    tempArr[i++] = mArray[p1++];
+                }
+            }
+            while(p0 < mid) //左边还有数
+            {
+                tempArr[i++] = mArray[p0++];
+            }
+            while(p1< hi) //右边还有数
+            {
+                tempArr[i++] = mArray[p1++];
+            }
+            while(j < tempArr.Length)
+            {
+                
+                mArray[lo++] = tempArr[j++];
+                
+            }
+            return sum;
+        }
+        #endregion
+        #region 小和问题
+        public static int LessSum(int[] rawArr )
+        {
+            int[] temp = rawArr;
+            int sum = LessSum(rawArr,0, rawArr.Length);
+            rawArr = temp;
+            return sum;
+        }
+        //在一个数组中，每一个数左边比当前数小的数累加起来，叫做这个数组的小和
+        public static int LessSum(int[] rawArr,int lo,int hi)
+        {
+            //转化为 对每一个数，右边比它大的数的个数 * 自己 就是当前数给总体的小和的贡献
+            //转化为类似逆序对的问题
+            if (hi - lo <= 1)
+            {
+                //Console.WriteLine("[" + lo + "," + hi + " )");
+                return 0;
+            }
+            
+            int mid = lo + ((hi - lo) >> 1);
+            int lNum = LessSum(rawArr, lo, mid);
+            int rNum = LessSum(rawArr, mid, hi);
+            int mergeNum = MergeLessSum(rawArr,lo, hi);
+            //Console.WriteLine("["+lo +"," + hi+ " )"+ lNum + " " + rNum + " " + mergeNum);
+            return lNum + rNum + mergeNum;
+        }
+        public static int MergeLessSum(int[] rawArr,int lo,int hi)
+        {
+            int[] tempArr = new int[hi - lo];
+            int mid = lo + ((hi - lo) >> 1);
+            int i = 0;
+            int p0 = lo;
+            int p1 = mid;
+            int sum = 0;
+
+            int j = 0;
+            while (p0 < mid && p1 < hi)
+            {
+                if (rawArr[p0].CompareTo(rawArr[p1]) < 0) //这里严格小于，相等时先将右侧的数加入tempArr
+                {
+                    sum = sum + (hi - p1) * rawArr[p0];
+                    tempArr[i++] = rawArr[p0++];
+                }
+                else
+                {
+                    tempArr[i++] = rawArr[p1++];
+                }
+            }
+            while (p0 < mid) //左边还有数
+            {
+                tempArr[i++] = rawArr[p0++];
+            }
+            while (p1 < hi) //右边还有数
+            {
+                tempArr[i++] = rawArr[p1++];
+            }
+            while (j < tempArr.Length)
+            {
+
+                rawArr[lo++] = tempArr[j++];
+
+            }
+            return sum;
         }
         #endregion
         #endregion

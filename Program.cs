@@ -1,5 +1,4 @@
 ﻿using DSA;
-using System.Runtime.InteropServices;
 
 internal class Program
 {
@@ -7,7 +6,7 @@ internal class Program
     {
         #region 向量测试
         
-        int[] array = { 3,5,4,7,6,3,5,8 };
+        int[] array = { 1,3,4,2,5 };
         Vector<int> v = new Vector<int>(array);
         //v.SelectionSort();
         //v.BubbleSort();
@@ -20,7 +19,9 @@ internal class Program
         //v.PatitionSimple(5);
         //v.Patition(5,out int a,out int b);
         //Console.WriteLine(a + " " + b);
-        v.QuickSort();
+        //v.QuickSort();
+        Console.WriteLine("逆序对个数" +v.ReverseOrderPairNum());
+        Console.WriteLine("数组的小和" + Vector<int>.LessSum(array));
         Console.WriteLine("ok");
         #endregion
         #region 异或问题测试
