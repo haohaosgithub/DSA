@@ -114,8 +114,10 @@ namespace DSA
         #region 归并排序
         public void MergeSort(int lo,int hi)
         {
+            //非法情况或者只有一个元素的情况
             if(mArray == null || size<=1) return;
             //Console.WriteLine($"正在调用Mersort({lo},{hi})");
+            //递归基
             if (hi - lo <= 1)
             {
                 //Console.WriteLine($"Mersort({lo},{hi})得到结果 规模为一时缩减为叶子节点");
@@ -167,6 +169,75 @@ namespace DSA
         public void MergeSort()
         {
             MergeSort(0, size);
+        }
+        #endregion
+        #region 快速排序
+        public void QuickSort(int lo,int hi)
+        {
+            Console.WriteLine("!!!!" + lo + "  " + hi);
+            if (lo >= hi) return; //递归基
+            
+            T value = mArray[hi-1];
+            Partition(value, out int l, out int r);
+            //Console.WriteLine($"根据{hi-1}:{mArray[hi-1]}  分区完成 {l},{r}");
+                
+            QuickSort(lo, l);
+            //Console.WriteLine($"[{lo},{l})排序完成");
+            QuickSort(r, hi);
+            //Console.WriteLine($"[{r},{hi})排序完成");
+            
+            
+        }
+        public void QuickSort()
+        {
+            QuickSort(0,size);
+        }
+
+        //将内置的[lo,hi)范围用value划分为左边都是<= 它的数，右边都是大于等于它的数
+        public void PartitionSimple(T value)
+        {
+            //最终[0, p0) <= [p0, size) >
+            int p0 = 0; // <= 的末尾位置的开区间 
+            int i = 0; //遍历索引
+            while(i < size)
+            {
+                if (mArray[i].CompareTo(value)<=0)
+                {
+                    Swap(i++,p0++);
+                }
+                else
+                {
+                    i++;
+                }
+            }
+            //Console.WriteLine(p0);
+
+        }
+        //将内置数组用value划分为左边都是< 它的数，中间都是等于它的数，右边都是大于它的数
+        
+        public void Partition(T value,out int l,out int r)
+        {
+            //最终[0,p0) < [p0,p1) == [p1,size) >
+            int i = 0;
+            int p0 = 0;
+            int p1 = size;
+            while(i< p1)
+            {
+                if (mArray[i].CompareTo(value)<0)
+                {
+                    Swap(p0++, i++);
+                }
+                else if(mArray[i].CompareTo(value) == 0)
+                {
+                    i++;
+                }
+                else
+                {
+                    Swap(i, --p1);
+                }
+            }
+            l = p0;
+            r = p1; 
         }
         #endregion
         #endregion
@@ -315,7 +386,7 @@ namespace DSA
             mArray[i] = mArray[j];
             mArray[j] = element;
         }
-
+        
         #endregion
 
 
