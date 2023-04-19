@@ -7,14 +7,15 @@ internal class Program
     {
         #region 向量测试
         
-        int[] array = { 0,1,2,2,2,3,4 };
+        int[] array = { 3,2,1,5,6 };
         Vector<int> v = new Vector<int>(array);
         //v.SelectionSort();
         //v.BubbleSort();
         //v.InsertionSort();
+        v.MergeSort();
 
-        //Console.WriteLine(v.BinarySearch(8));
-        Console.WriteLine(v.BinarySearchMinRank(2));
+        Console.WriteLine(v.BinarySearch(8));
+        //Console.WriteLine(v.BinarySearchMinRank(2));
         //Console.WriteLine(v.LocalMin());
         #endregion
         #region 异或问题测试

@@ -44,6 +44,7 @@ namespace DSA
 
         #region 排序接口
 
+        #region 选择排序
         public void SelectionSort(int lo, int hi)
         {
             if (mArray == null || size <= 1 || hi - lo <= 1) return;
@@ -61,12 +62,12 @@ namespace DSA
                 Swap(i, minIndex);
             }
         }
-
         public void SelectionSort()
         {
             SelectionSort(0, size);
         }
-
+        #endregion
+        #region 冒泡排序
         public void BubbleSort(int lo, int hi)
         {
             if (mArray == null || size <= 1 || hi - lo <= 1) return;
@@ -85,12 +86,12 @@ namespace DSA
                 hi--;  //减小未排序规模
             }
         }
-
         public void BubbleSort()
         {
             BubbleSort(0, size);
         }
-
+        #endregion
+        #region 插入排序
         public void InsertionSort(int lo, int hi)
         {
             if (mArray == null || size <= 1 || hi - lo <= 1) return;
@@ -105,11 +106,69 @@ namespace DSA
                 }
             }
         }
-
         public void InsertionSort()
         {
             InsertionSort(0, size);
         }
+        #endregion
+        #region 归并排序
+        public void MergeSort(int lo,int hi)
+        {
+            if(mArray == null || size<=1) return;
+            //Console.WriteLine($"正在调用Mersort({lo},{hi})");
+            if (hi - lo <= 1)
+            {
+                //Console.WriteLine($"Mersort({lo},{hi})得到结果 规模为一时缩减为叶子节点");
+                return;
+            } 
+            int mid = lo + ((hi - lo) >> 1); //注意 >> 优先级较低，必须打括号
+            
+            MergeSort(lo,mid);
+            MergeSort(mid,hi);
+            //Console.WriteLine($"Mersort({lo},{hi})开始Merge");
+            Merge(lo,hi);
+            //Console.WriteLine($"Mersort({lo},{hi})得到结果,完成");
+        }
+        public void Merge(int lo,int hi)
+        {
+            T[] temp = new T[hi-lo];
+            int p1 = lo;
+            int mid = lo + ((hi - lo) >> 1);
+            int p2 = mid;
+
+            int tempIndex = 0;
+            while(p1<mid && p2< hi)
+            {
+                if (mArray[p1].CompareTo(mArray[p2]) <= 0)
+                {
+                    temp[tempIndex++] = mArray[p1++];
+                }
+                else 
+                {
+                    temp[tempIndex++] = mArray[p2++];
+                }
+            }
+            while(p1 < mid)
+            {
+                temp[tempIndex++] = mArray[p1++];
+            }
+            while(p2 < hi)
+            {
+                temp[tempIndex++] = mArray[p2++];
+            }
+            //Console.WriteLine(temp.Length);
+            for (int i = 0;i< temp.Length;i++)
+            {
+                //Console.WriteLine(temp[i]);
+                mArray[lo++] = temp[i];
+                
+            }
+        }
+        public void MergeSort()
+        {
+            MergeSort(0, size);
+        }
+        #endregion
         #endregion
         #region 查找接口
         //二分查找（前提是数据状况为有序）
