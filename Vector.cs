@@ -43,8 +43,7 @@ namespace DSA
         }
         #endregion
 
-        #region 排序接口
-
+        #region 排序及相关接口
         #region 选择排序
         public void SelectionSort(int lo, int hi)
         {
@@ -175,9 +174,10 @@ namespace DSA
         #region 快速排序
         public void QuickSort(int lo,int hi)
         {
-            Console.WriteLine("!!!!" + lo + "  " + hi);
-            if (lo >= hi) return; //递归基
             
+            if (lo >= hi) return; //递归基
+            Random rand = new Random();
+            Swap(rand.Next(lo,hi) , hi - 1);
             T value = mArray[hi-1];
             Partition(value, out int l, out int r);
             //Console.WriteLine($"根据{hi-1}:{mArray[hi-1]}  分区完成 {l},{r}");

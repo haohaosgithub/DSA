@@ -19,9 +19,9 @@ internal class Program
         //v.PatitionSimple(5);
         //v.Patition(5,out int a,out int b);
         //Console.WriteLine(a + " " + b);
-        //v.QuickSort();
-        Console.WriteLine("逆序对个数" +v.ReverseOrderPairNum());
-        Console.WriteLine("数组的小和" + Vector<int>.LessSum(array));
+        v.QuickSort();
+        //Console.WriteLine("逆序对个数" +v.ReverseOrderPairNum());
+        //Console.WriteLine("数组的小和" + Vector<int>.LessSum(array));
         Console.WriteLine("ok");
         #endregion
         #region 异或问题测试
