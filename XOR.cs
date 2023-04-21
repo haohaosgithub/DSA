@@ -32,13 +32,19 @@
             }
             //此时可以理解为只剩 1个 i 和一个 j 异或，这个值为xor
             //int rightOne = xor & (~xor + 1); //x 取反+1 相当于将最右边的1左边的所有数取反，此时  x 与取反加一（-x）的唯一共同点是最右边的1，rightOne表示最右边的1，其他位全为0代表的数
-            int rightOne = xor & (-xor);
+            int rightOne = xor & (-xor); //只有1位是1
             foreach (var item in arr)
+            {
+                Console.WriteLine("all:  " + item);
                 //按照某一位为1或0的数（此处为最右侧出现的1那一位）分为两个集合， a 和 b一定分别在这两个不同的集合中，此处取1这个集合中的所有数求异或，值为a
-                if ((item & rightOne) == 1) 
+                if ((item & rightOne) == 0)
+                //if ((item & rightOne) == rightOne) //两种判断均可，两数在不同的集合里
                 {
+                    Console.WriteLine(item);
                     xor1 ^= item;
                 }
+            }
+                
             a = xor1;
             b = a ^ xor;
         }
