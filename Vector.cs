@@ -5,6 +5,7 @@ using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Schema;
 
 namespace DSA
 {
@@ -364,7 +365,63 @@ namespace DSA
             return sum;
         }
         #endregion
+        #region 大根堆（优先级队列）相关
+        
+        //上滤 
+        public void PercolateUp(int i)
+        {
+            while (mArray[i].CompareTo(mArray[(i - 1) / 2]) > 0)  //这里隐藏了一个条件，就是当已经为根节点时就不满足，可以正常从循环中退出
+            {
+                //只要当前节点小于父节点（堆序性不满足），则交换两个节点，并继续考察交换后的节点
+                Swap(i, (i - 1) / 2);
+                i = (i - 1) / 2;
+            }
+        }
+        
+        //下滤
+        public void PercolateDown(int i,int heapSize)
+        {
+            int leftIndex = i * 2 + 1;
+            
+            while(leftIndex < heapSize) //还有孩子节点
+            {
+                //三者取最大
+                int maxValueIndex = (leftIndex + 1 < heapSize) && (mArray[leftIndex + 1].CompareTo(mArray[leftIndex]) > 0) ? leftIndex + 1 :  leftIndex;
+                maxValueIndex = mArray[i].CompareTo(mArray[maxValueIndex])  > 0? i : maxValueIndex;
+                if (maxValueIndex == i) break; //如果当前节点已经是最大，则达到最终位置
+                Swap(i,maxValueIndex); 
+                //继续考察新的位置
+                i = maxValueIndex;
+                leftIndex = i * 2 + 1;
+            }
+        }
+        
+        //堆排序
+        public void HeapSort()
+        {
+            if(mArray == null || size < 2) return;
+            //for (int i = 1; i < size; i++) //建堆(自上而下的上滤） O(logn)
+            //{
+            //    PercolateUp(i);
+            //}
+            for (int i = size - 1; i >= 0; i--) //更高效的建堆（自下而上的下滤）O(n)
+            {
+                PercolateDown(i, size);
+            }
+            int heapSize = size;
+            Swap(0, --heapSize);
+            while(heapSize > 0)
+            {
+                PercolateDown(0,heapSize);
+                Swap(0,--heapSize);
+            }
+            return;
+        }
+
+        
         #endregion
+        #endregion
+
         #region 查找接口
         //二分查找（前提是数据状况为有序）
         public int BinarySearch(T value, int lo, int hi)
@@ -449,6 +506,7 @@ namespace DSA
             return BinarySearchMaxRank(value,0,size);
         }
         #endregion
+
         #region 局部最小值
         //局部最小值问题： 无序数组中，相邻数一定不相等，求数组中的一个局部最小值索引（小于相邻的数） 时间复杂度要求小于O(N)
         //局部最小值： 对于0位置，如果他比1位置的数小，则为局部最小值
@@ -509,6 +567,7 @@ namespace DSA
             T element = mArray[i];
             mArray[i] = mArray[j];
             mArray[j] = element;
+
         }
         
         #endregion
