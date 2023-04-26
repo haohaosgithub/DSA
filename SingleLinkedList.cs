@@ -55,6 +55,10 @@ namespace DSA
         {
             return head.InsertAfter(e);
         }
+        public Node<T> InsertAsFirst(Node<T> node)
+        {
+            return head.InsertAfter(node);
+        }
         //尾插法
         public Node<T> InsertAsLast(T e)
         {
@@ -68,10 +72,21 @@ namespace DSA
             return pre.InsertAfter(e);
 
         }
+        public Node<T> InsertAsLast(Node<T> node)
+        {
+            Node<T>? cur = head;
+            Node<T> pre = null;
+            while (cur != null)
+            {
+                pre = cur;
+                cur = cur.next;
+            }
+            return pre.InsertAfter(node);
+        }
         #endregion
 
         #region 链表相关算法(重要技巧，快慢指针，额外数据结构（如哈希表，Vector等））
-        
+
         //反转链表
         public void Reverse()
         {
@@ -267,7 +282,7 @@ namespace DSA
                 ++size1;
                 cur = cur.next;
             }
-            cur = otherList.head.next;
+            cur2 = otherList.head.next;
             while(cur2.next != null)
             {
                 ++size2;
@@ -284,11 +299,11 @@ namespace DSA
                 --delta;
                 cur = cur.next;
             }
-            while(cur != cur2)
-            {
-                cur = cur.next;
-                cur2 = cur2.next;
-            }
+            //while(cur != cur2) //应该不需要这个逻辑，之前已经得到交点为cur
+            //{
+            //    cur = cur.next;
+            //    cur2 = cur2.next;
+            //}
             return cur;
         }
         //两个有环链表是否相交
@@ -307,7 +322,7 @@ namespace DSA
                     ++size1;
                     cur = cur.next;
                 }
-                cur = otherList.head.next;
+                cur2 = otherList.head.next;
                 while (cur2.next != enterNode2)
                 {
                     ++size2;

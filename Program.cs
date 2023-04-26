@@ -64,15 +64,50 @@ internal class Program
         //    cur = cur.next;
         //}
 
+        //SingleLinkedList<int> list = new SingleLinkedList<int>();
+        //list.InsertAsLast(1);
+        //Node<int> node = new Node<int>(2);
+        //list.InsertAsLast(node);
+        //list.InsertAsLast(3);
+        //list.InsertAsLast(4);
+        //list.InsertAsLast(5);
+
+
+        //list.Partation(3);
+        //Console.WriteLine(list.IsPalindrome());
+
         SingleLinkedList<int> list = new SingleLinkedList<int>();
-        list.InsertAsLast(1);
-        list.InsertAsLast(2);
-        list.InsertAsLast(3);
-        list.InsertAsLast(2);
-        list.InsertAsLast(1);
+        Node<int> node1 = new Node<int>(1);
+        list.InsertAsLast(node1);
+        Node<int> node2 = new Node<int>(2);
+        list.InsertAsLast(node2);
+        Node<int> node3 = new Node<int>(3);
+        list.InsertAsLast(node3);
+        Node<int> node4 = new Node<int>(4);
+        list.InsertAsLast(node4);
+        Node<int> node5 = new Node<int>(5);
+        list.InsertAsLast(node5);
+
+        SingleLinkedList<int> list2 = new SingleLinkedList<int>();
+        //Node<int> node1 = new Node<int>(1);
+        //list.InsertAsLast(node1);
+        //Node<int> node2 = new Node<int>(2);
+        //list.InsertAsLast(node2);
+        list2.InsertAsLast(node3);
         
-        list.Partation(3);
-        Console.WriteLine(list.IsPalindrome());
+        list2.InsertAsLast(node4);
+        
+        list2.InsertAsLast(node5);
+
+
+        Node<int> node = list.IsIntersectingNoLoop(list2);
+        Console.WriteLine(node.value);
+        Node<int> cur = list.head.next;
+        while (cur != null)
+        {
+            Console.WriteLine(cur.value);
+            cur = cur.next;
+        }
         #endregion
 
 
