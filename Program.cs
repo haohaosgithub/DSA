@@ -1,5 +1,7 @@
 ﻿using DSA;
 using System;
+using System.Runtime.InteropServices;
+using System.Xml.Linq;
 
 internal class Program
 {
@@ -7,10 +9,10 @@ internal class Program
     {
         #region 向量测试
         //Vector<int> v = new Vector<int>();
-        
-        int[] array = { 1,3,4,2,5 };
-        Vector<int> v = new Vector<int>(array);
-        v.HeapSort();
+
+        //int[] array = { 1,3,4,2,5 };
+        //Vector<int> v = new Vector<int>(array);
+        //v.HeapSort();
         //v.SelectionSort();
         //v.BubbleSort();
         //v.InsertionSort();
@@ -34,8 +36,35 @@ internal class Program
         //XOR.FindOnlyTwice(xorarr2,out int a,out int b);
         //Console.WriteLine(a + " " + b);
         #endregion
-        
+        #region 链表测试
+        //SingleLinkedList<int> list = new SingleLinkedList<int>();
+        //list.InsertAsLast(1);
+        //list.InsertAsLast(2);
+        //list.InsertAsLast(3);
+        //list.InsertAsLast(4);
+        //list.InsertAsLast(5);
 
-        
+        //SingleLinkedList<int> otherList = new SingleLinkedList<int>();
+        //otherList.InsertAsLast(1);
+        //otherList.InsertAsLast(2);
+        //otherList.InsertAsLast(3);
+        //otherList.InsertAsLast(4);
+        //otherList.InsertAsLast(5);
+        //list.InsertAsFirst(1);
+        //list.InsertAsFirst(2);
+        //list.InsertAsFirst(3);
+        //list.InsertAsFirst(4);
+        //list.InsertAsFirst(5);
+        //list.Reverse();
+        //list.PrintPublic(otherList);
+        //Node<int> cur = list.head.next;
+        //while (cur != null)
+        //{
+        //    Console.WriteLine(cur.value);
+        //    cur = cur.next;
+        //}
+        #endregion
+
+
     }
 }
