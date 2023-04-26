@@ -63,6 +63,16 @@ internal class Program
         //    Console.WriteLine(cur.value);
         //    cur = cur.next;
         //}
+
+        SingleLinkedList<int> list = new SingleLinkedList<int>();
+        list.InsertAsLast(1);
+        list.InsertAsLast(2);
+        list.InsertAsLast(3);
+        list.InsertAsLast(2);
+        list.InsertAsLast(1);
+        
+        list.Partation(3);
+        Console.WriteLine(list.IsPalindrome());
         #endregion
 
 
