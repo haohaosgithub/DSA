@@ -1,4 +1,5 @@
 ﻿using DSA;
+using System.Xml.Linq;
 
 
 internal class Program
@@ -107,8 +108,8 @@ internal class Program
         //    cur = cur.next;
         //}
         #endregion
-        #region 二叉树
-        BinaryTreeNode<int> node4 = new BinaryTreeNode<int>(4,null,null);
+        #region 二叉树测试
+        BinaryTreeNode<int> node4 = new BinaryTreeNode<int>(4, null, null);
         BinaryTreeNode<int> node5 = new BinaryTreeNode<int>(5, null, null);
         BinaryTreeNode<int> node2 = new BinaryTreeNode<int>(2, node4, node5);
         BinaryTreeNode<int> node6 = new BinaryTreeNode<int>(6, null, null);
@@ -116,11 +117,17 @@ internal class Program
         BinaryTreeNode<int> node3 = new BinaryTreeNode<int>(3, node6, node7);
         BinaryTreeNode<int> head = new BinaryTreeNode<int>(1, node2, node3);
 
+        //BinaryTreeNode<int> node2 = new BinaryTreeNode<int>(1, null, null);
+        //BinaryTreeNode<int> node3 = new BinaryTreeNode<int>(3, null, null);
+        //BinaryTreeNode<int> head = new BinaryTreeNode<int>(2, node2, node3);
+
         BinaryTree<int> bt = new BinaryTree<int>(head);
         bt.LevelOrderTraversal((value) => {
             Console.WriteLine(value);
         });
-
+        Console.WriteLine(bt.IsBinarySearchTree());
+        Console.WriteLine(bt.IsFullTree());
+        Console.WriteLine(bt.IsBalanceTree());
         #endregion
 
     }
