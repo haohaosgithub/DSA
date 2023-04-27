@@ -1,7 +1,5 @@
 ﻿using DSA;
-using System;
-using System.Runtime.InteropServices;
-using System.Xml.Linq;
+
 
 internal class Program
 {
@@ -76,40 +74,55 @@ internal class Program
         //list.Partation(3);
         //Console.WriteLine(list.IsPalindrome());
 
-        SingleLinkedList<int> list = new SingleLinkedList<int>();
-        Node<int> node1 = new Node<int>(1);
-        list.InsertAsLast(node1);
-        Node<int> node2 = new Node<int>(2);
-        list.InsertAsLast(node2);
-        Node<int> node3 = new Node<int>(3);
-        list.InsertAsLast(node3);
-        Node<int> node4 = new Node<int>(4);
-        list.InsertAsLast(node4);
-        Node<int> node5 = new Node<int>(5);
-        list.InsertAsLast(node5);
+        //SingleLinkedList<int> list = new SingleLinkedList<int>();
+        //Node<int> node1 = new Node<int>(1);
+        //list.InsertAsLast(node1);
+        //Node<int> node2 = new Node<int>(2);
+        //list.InsertAsLast(node2);
+        //Node<int> node3 = new Node<int>(3);
+        //list.InsertAsLast(node3);
+        //Node<int> node4 = new Node<int>(4);
+        //list.InsertAsLast(node4);
+        //Node<int> node5 = new Node<int>(5);
+        //list.InsertAsLast(node5);
 
         SingleLinkedList<int> list2 = new SingleLinkedList<int>();
         //Node<int> node1 = new Node<int>(1);
         //list.InsertAsLast(node1);
         //Node<int> node2 = new Node<int>(2);
         //list.InsertAsLast(node2);
-        list2.InsertAsLast(node3);
-        
-        list2.InsertAsLast(node4);
-        
-        list2.InsertAsLast(node5);
+        //list2.InsertAsLast(node3);
+
+        //list2.InsertAsLast(node4);
+
+        //list2.InsertAsLast(node5);
 
 
-        Node<int> node = list.IsIntersectingNoLoop(list2);
-        Console.WriteLine(node.value);
-        Node<int> cur = list.head.next;
-        while (cur != null)
-        {
-            Console.WriteLine(cur.value);
-            cur = cur.next;
-        }
+        //Node<int> node = list.IsIntersectingNoLoop(list2);
+        //Console.WriteLine(node.value);
+        //Node<int> cur = list.head.next;
+        //while (cur != null)
+        //{
+        //    Console.WriteLine(cur.value);
+        //    cur = cur.next;
+        //}
+        #endregion
+        #region 二叉树
+        BinaryTreeNode<int> node4 = new BinaryTreeNode<int>(4,null,null);
+        BinaryTreeNode<int> node5 = new BinaryTreeNode<int>(5, null, null);
+        BinaryTreeNode<int> node2 = new BinaryTreeNode<int>(2, node4, node5);
+        BinaryTreeNode<int> node6 = new BinaryTreeNode<int>(6, null, null);
+        BinaryTreeNode<int> node7 = new BinaryTreeNode<int>(7, null, null);
+        BinaryTreeNode<int> node3 = new BinaryTreeNode<int>(3, node6, node7);
+        BinaryTreeNode<int> head = new BinaryTreeNode<int>(1, node2, node3);
+
+        BinaryTree<int> bt = new BinaryTree<int>(head);
+        bt.LevelOrderTraversal((value) => {
+            Console.WriteLine(value);
+        });
+
         #endregion
 
-
     }
+    
 }

@@ -7,30 +7,30 @@ using System.Threading.Tasks;
 namespace DSA
 {
     #region 单链表Node
-    public class Node<T> where T : IComparable
+    public class SingleLinkedListNode<T> where T : IComparable
     {
         public T value;
-        public Node<T>? next;
+        public SingleLinkedListNode<T>? next;
 
-        public Node()
+        public SingleLinkedListNode()
         {
 
         }
-        public Node(T value)
+        public SingleLinkedListNode(T value)
         {
             this.value = value;
             next = null;
         }
         //在当前节点后插入元素
-        public Node<T> InsertAfter(T value)
+        public SingleLinkedListNode<T> InsertAfter(T value)
         {
-            Node<T> newNode = new Node<T>(value); //新节点
+            SingleLinkedListNode<T> newNode = new SingleLinkedListNode<T>(value); //新节点
             newNode.next = next; //新节点的next字段
             next = newNode; //当前节点的next字段
             return newNode;
             //Node<T> newNodeNext = next;
         }
-        public Node<T> InsertAfter(Node<T> newNode )
+        public SingleLinkedListNode<T> InsertAfter(SingleLinkedListNode<T> newNode )
         {
 
             newNode.next = next; //新节点的next字段
@@ -44,26 +44,26 @@ namespace DSA
     public class SingleLinkedList<T> where T: IComparable
     {
         
-        public Node<T> head; //头节点
+        public SingleLinkedListNode<T> head; //头节点
         public SingleLinkedList()
         {
-            head = new Node<T>();
+            head = new SingleLinkedListNode<T>();
         }
         #region 插入
         //头插法   
-        public Node<T> InsertAsFirst(T e)
+        public SingleLinkedListNode<T> InsertAsFirst(T e)
         {
             return head.InsertAfter(e);
         }
-        public Node<T> InsertAsFirst(Node<T> node)
+        public SingleLinkedListNode<T> InsertAsFirst(SingleLinkedListNode<T> node)
         {
             return head.InsertAfter(node);
         }
         //尾插法
-        public Node<T> InsertAsLast(T e)
+        public SingleLinkedListNode<T> InsertAsLast(T e)
         {
-            Node<T>? cur = head;
-            Node<T> pre = null;
+            SingleLinkedListNode<T>? cur = head;
+            SingleLinkedListNode<T> pre = null;
             while (cur != null) 
             {
                 pre = cur;
@@ -72,10 +72,10 @@ namespace DSA
             return pre.InsertAfter(e);
 
         }
-        public Node<T> InsertAsLast(Node<T> node)
+        public SingleLinkedListNode<T> InsertAsLast(SingleLinkedListNode<T> node)
         {
-            Node<T>? cur = head;
-            Node<T> pre = null;
+            SingleLinkedListNode<T>? cur = head;
+            SingleLinkedListNode<T> pre = null;
             while (cur != null)
             {
                 pre = cur;
@@ -90,9 +90,9 @@ namespace DSA
         //反转链表
         public void Reverse()
         {
-            Node<T> cur = head.next;
-            Node<T> pre = null;
-            Node<T> next = null;
+            SingleLinkedListNode<T> cur = head.next;
+            SingleLinkedListNode<T> pre = null;
+            SingleLinkedListNode<T> next = null;
 
             while (cur != null) 
             {
@@ -108,8 +108,8 @@ namespace DSA
         //打印两个有序链表的公共部分
         public void PrintPublic(SingleLinkedList<T> otherList)
         {
-            Node<T> cur1 = head.next;
-            Node<T> cur2 = otherList.head.next;
+            SingleLinkedListNode<T> cur1 = head.next;
+            SingleLinkedListNode<T> cur2 = otherList.head.next;
             while(cur1 != null && cur2 != null)
             {
                 if (cur1.value.Equals(cur2.value))
@@ -135,7 +135,7 @@ namespace DSA
             if (useStack)
             {
                 Stack<T> stack = new Stack<T>();
-                Node<T> cur = head.next;
+                SingleLinkedListNode<T> cur = head.next;
                 while (cur != null)
                 {
                     stack.Push(cur.value);
@@ -154,8 +154,8 @@ namespace DSA
             else
             {
                 if (head.next == null || head.next.next == null) return true;
-                Node<T> slow = head;
-                Node<T> fast = head;
+                SingleLinkedListNode<T> slow = head;
+                SingleLinkedListNode<T> fast = head;
                 
                 while (fast!= null && fast.next != null) //对应奇和偶的情况（偶包含了奇）,slow走到中点
                 {
@@ -164,9 +164,9 @@ namespace DSA
                 }
                 
                 //将后半部分逆序
-                Node<T> cur = slow;
-                Node<T> next = null;
-                Node<T> pre = null;
+                SingleLinkedListNode<T> cur = slow;
+                SingleLinkedListNode<T> next = null;
+                SingleLinkedListNode<T> pre = null;
                 while(cur != null)
                 {
                     next = cur.next;
@@ -174,7 +174,7 @@ namespace DSA
                     pre = cur;
                     cur = next;
                 }
-                Node<T> afterHead = pre; //后半部分的第一个节点(逆序后，即最右侧节点）
+                SingleLinkedListNode<T> afterHead = pre; //后半部分的第一个节点(逆序后，即最右侧节点）
                 
                 bool res = true; //分别遍历并比较 -> <-
                 slow = head.next;
@@ -207,13 +207,13 @@ namespace DSA
         //链表Partation
         public void Partation(int v)
         {
-            Node<T> smallHead = new Node<T>();
-            Node<T> equalHead = new Node<T>();
-            Node<T> bigHead = new Node<T>();
-            Node<T> s = smallHead;
-            Node<T> e = equalHead;
-            Node<T> b = bigHead;
-            Node<T> cur = head.next;
+            SingleLinkedListNode<T> smallHead = new SingleLinkedListNode<T>();
+            SingleLinkedListNode<T> equalHead = new SingleLinkedListNode<T>();
+            SingleLinkedListNode<T> bigHead = new SingleLinkedListNode<T>();
+            SingleLinkedListNode<T> s = smallHead;
+            SingleLinkedListNode<T> e = equalHead;
+            SingleLinkedListNode<T> b = bigHead;
+            SingleLinkedListNode<T> cur = head.next;
             while(cur != null)
             {
                 if(cur.value.CompareTo(v) < 0)
@@ -247,11 +247,11 @@ namespace DSA
         //判断链表是否有环，有则返回环的入口节点，没有则返回null
         //从第一个节点出发，慢走一步，快走两步
         //第一次相遇后，快/慢指针回到表头，两个指针开始同时走一步，第一次遇到的时候便是入环节点
-        public Node<T> IsLoop()
+        public SingleLinkedListNode<T> IsLoop()
         {
             if (head.next == null || head.next.next == null || head.next.next.next == null) return null; //三个节点一下一定无环
-            Node<T> slow = head.next.next;
-            Node<T> fast = head.next.next.next;
+            SingleLinkedListNode<T> slow = head.next.next;
+            SingleLinkedListNode<T> fast = head.next.next.next;
             while(slow != fast)
             {
                 if(fast.next == null || fast.next.next == null)
@@ -271,12 +271,12 @@ namespace DSA
             return slow;
         }
         //两个无环链表是否相交
-        public Node<T> IsIntersectingNoLoop(SingleLinkedList<T> otherList)
+        public SingleLinkedListNode<T> IsIntersectingNoLoop(SingleLinkedList<T> otherList)
         {
             int size1 = 0;
             int size2 = 0;
-            Node<T> cur = head.next;
-            Node<T> cur2 = otherList.head.next;
+            SingleLinkedListNode<T> cur = head.next;
+            SingleLinkedListNode<T> cur2 = otherList.head.next;
             while (cur.next != null)
             {
                 ++size1;
@@ -307,16 +307,16 @@ namespace DSA
             return cur;
         }
         //两个有环链表是否相交
-        public Node<T> IsIntersectingTwoLoop(SingleLinkedList<T> otherList)
+        public SingleLinkedListNode<T> IsIntersectingTwoLoop(SingleLinkedList<T> otherList)
         {
-            Node<T> enterNode1 = IsLoop();
-            Node<T> enterNode2 = otherList.IsLoop();
+            SingleLinkedListNode<T> enterNode1 = IsLoop();
+            SingleLinkedListNode<T> enterNode2 = otherList.IsLoop();
             if(enterNode1 == enterNode2) //情况1：入口节点相同
             {
                 int size1 = 0;
                 int size2 = 0;
-                Node<T> cur = head.next;
-                Node<T> cur2 = otherList.head.next;
+                SingleLinkedListNode<T> cur = head.next;
+                SingleLinkedListNode<T> cur2 = otherList.head.next;
                 while (cur.next != enterNode1)
                 {
                     ++size1;
@@ -348,7 +348,7 @@ namespace DSA
             }
             else
             {
-                Node<T> cur = enterNode1.next;
+                SingleLinkedListNode<T> cur = enterNode1.next;
                 while(cur != enterNode1) 
                 {
                     if(cur == enterNode2) //情况2：入环节点不同,均为第一个相交节点
