@@ -169,6 +169,42 @@ namespace DSA
                 }
             }
         }
+        #region 层序遍历的应用：判断是否是完全二叉树
+        //层序遍历节点
+        //1.如果当前节点只有右孩子，则返回false
+        //2.如果遇到了第一个孩子不完全的节点（只有左孩子或者左右均无），则后续均为叶节点才为CBT
+        public bool IsCBT()
+        {
+            return IsCBT(root);
+        }
+        public bool IsCBT(BinaryTreeNode<T> node)
+        {
+            if (node == null) return true;
+            Queue<BinaryTreeNode<T>> queue = new Queue<BinaryTreeNode<T>>();
+            queue.Enqueue(node);
+            bool isLeaf = false;
+            while (queue.Count != 0)
+            {
+                node = queue.Dequeue();
+                
+                if ((node.left == null && node.right != null)
+                    || (isLeaf) && (node.left != null || node.right != null))
+                {
+                    return false;
+                }
+                if ((node.left == null && node.right == null) || (node.left != null) && node.right == null)
+                    isLeaf = true;
+                if (node.left != null)
+                {
+                    queue.Enqueue(node.left);
+                }
+                if (node.right != null)
+                {
+                    queue.Enqueue(node.right);
+                }
+            }
+            return true;
+        }
         #endregion
         #endregion
         #region 树型DP相关问题
@@ -284,6 +320,8 @@ namespace DSA
         }
         #endregion
         #endregion
+        #endregion
     }
+
 
 }

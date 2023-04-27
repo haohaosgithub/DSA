@@ -128,6 +128,7 @@ internal class Program
         Console.WriteLine(bt.IsBinarySearchTree());
         Console.WriteLine(bt.IsFullTree());
         Console.WriteLine(bt.IsBalanceTree());
+        Console.WriteLine(bt.IsCBT());
         #endregion
 
     }
